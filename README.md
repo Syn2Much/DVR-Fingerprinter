@@ -19,7 +19,7 @@ A high-performance, multi-threaded Python tool for scanning, fingerprinting, and
 - **Verbose Mode**: Detailed output showing detection signatures and evidence
 - **Progress Tracking**: Real-time scan progress with completion statistics
 - **SSL Bypass**: Automatically handles self-signed certificates common in DVRs
-- 
+  
 ##
 <img width="1703" height="1171" alt="Screenshot 2026-01-18 101903" src="https://github.com/user-attachments/assets/49836508-06b2-40ee-9d66-f302263f5590" />
 
