@@ -5,9 +5,6 @@
 [![Threads](https://img.shields.io/badge/threads-configurable-orange.svg)](README.md)
 [![Version](https://img.shields.io/badge/version-1.1-brightgreen.svg)](README.md)
 
-##
-A high-performance, multi-threaded Python tool for scanning, fingerprinting, and logging DVR devices from IP address lists. Perfect for security researchers, network administrators, and penetration testers.
-
 # ✨ Features
 
 - **Multi-threaded Scanning**: Lightning-fast parallel scanning with configurable thread counts
