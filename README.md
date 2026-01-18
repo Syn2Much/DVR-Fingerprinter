@@ -5,9 +5,10 @@
 [![Threads](https://img.shields.io/badge/threads-configurable-orange.svg)](README.md)
 [![Version](https://img.shields.io/badge/version-1.1-brightgreen.svg)](README.md)
 
+##
 A high-performance, multi-threaded Python tool for scanning, fingerprinting, and logging DVR devices from IP address lists. Perfect for security researchers, network administrators, and penetration testers.
 
-## ✨ Features
+# ✨ Features
 
 - **Multi-threaded Scanning**: Lightning-fast parallel scanning with configurable thread counts
 - **Smart DVR Detection**: Advanced pattern matching for 12+ DVR brands including Hikvision, Dahua, Axis, and more
@@ -18,10 +19,13 @@ A high-performance, multi-threaded Python tool for scanning, fingerprinting, and
 - **Verbose Mode**: Detailed output showing detection signatures and evidence
 - **Progress Tracking**: Real-time scan progress with completion statistics
 - **SSL Bypass**: Automatically handles self-signed certificates common in DVRs
+- 
+##
+<img width="1703" height="1171" alt="Screenshot 2026-01-18 101903" src="https://github.com/user-attachments/assets/49836508-06b2-40ee-9d66-f302263f5590" />
 
-## 🚀 Quick Start
+# 🚀 Quick Start
 
-### Installation
+## Installation
 
 1. **Clone the repository**:
    ```bash
@@ -271,22 +275,6 @@ Contributions are welcome! Here's how you can help:
 3. **Improve Performance**: Optimize scanning or detection algorithms
 4. **Enhance Features**: Add new output formats or scanning options
 
-### Development Setup
-```bash
-# Fork and clone the repository
-git clone https://github.com/yourusername/dvr-scanner.git
-cd dvr-scanner
-
-# Create virtual environment
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# Install development dependencies
-pip install -r requirements-dev.txt
-
-# Run tests (if available)
-python -m pytest tests/
-```
 
 ### Adding New DVR Signatures
 To add a new DVR brand, update the `detect_dvr_type_with_signatures` method with:
