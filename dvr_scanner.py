@@ -165,9 +165,10 @@ class FingerPrinter:
 
             # Check for specific login form inputs combined with DVR terms
             if not dvr_types:
+                # Requires 'password' field AND 'login' or 'user'
                 if 'password' in content_lower and ('login' in content_lower or 'user' in content_lower):
-                    # Only if it also looks like a DVR
-                    suspicious_terms = ['onvif', 'rtsp', 'stream', 'channel', 'preview', 'playback']
+                    # Only if it also looks like a DVR (extra validation)
+                    suspicious_terms = ['onvif', 'rtsp', 'stream', 'channel', 'preview', 'playback', 'live view']
                     for term in suspicious_terms:
                         if term in content_lower:
                             dvr_types = ['Suspected DVR (Login Page)']
@@ -307,6 +308,7 @@ class FingerPrinter:
         '''
         STRICTER detection: Only matches explicit brand signatures or login page indicators.
         Removed generic words like 'camera', 'security' that match unrelated websites.
+        REMOVED: 'index.html', 'index.asp' which cause false positives on default web server pages.
         '''
         dvr_signatures = {
             'Hikvision': [r'hikvision', r'hik\-?vision', r'doc/page/login\.asp', r'ivms', r'webcomponent'],
@@ -318,7 +320,8 @@ class FingerPrinter:
             'Mobotix': [r'mobotix'],
             'XMEye': [r'xmeye', r'cloud\.net'],
             'Generic Login': [
-                r'login\.asp', r'login\.php', r'index\.asp', r'index\.html'
+                # Removed index.html and index.asp to avoid Apache default page false positives
+                r'login\.asp', r'login\.php', r'login\.html', r'login\.htm'
             ]
         }
         
@@ -338,8 +341,10 @@ class FingerPrinter:
                 if re.search(pattern, content_text, re.IGNORECASE) or re.search(pattern, headers_text, re.IGNORECASE):
                     # ADDITIONAL FILTER: If it's a "Generic" signature, ensure it actually looks like a login page
                     if dvr_brand == 'Generic Login':
-                        if 'user' not in content_text and 'password' not in content_text:
-                            continue # Skip if it's just a file named login.php without login fields
+                        # STRICTER: Must contain "password" to verify it's a login form
+                        # Default Apache/Nginx pages often match filenames but don't have password fields
+                        if 'password' not in content_text:
+                            continue 
 
                     if dvr_brand not in detected_dvrs:
                         detected_dvrs.append(dvr_brand)
