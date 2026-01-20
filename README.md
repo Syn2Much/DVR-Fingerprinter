@@ -22,7 +22,7 @@ pip install requests urllib3
 
 ## Usage
 ```bash
-python dvr_finder -h                     full help
+python dvr_finder -h      
 python dvr_finder.py -i ips.txt -t 10 -o dvr_scan_results.json
 ```
 
@@ -37,4 +37,4 @@ Detection is restricted to verified vendor signatures.
 
 ## Disclaimer
 **Educational and authorized testing only.** You must have explicit permission to scan networks/devices.
-```
+
