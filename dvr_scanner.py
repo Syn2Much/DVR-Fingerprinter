@@ -33,6 +33,7 @@ class FingerPrinter:
         self.total_ips = 0
         self.dvr_count = 0
         self.failed_count = 0
+        self.http_error_count = 0  # Track 400/404 responses
         
         self.dvr_results: List[Dict[str, Any]] = []
         self.last_save_count = 0
@@ -219,6 +220,14 @@ class FingerPrinter:
                 allow_redirects=True
             )
             
+            # SKIP 400/404 responses entirely - don't process them
+            if response.status_code in [400, 404]:
+                with self.results_lock:
+                    self.scanned_count += 1
+                    self.http_error_count += 1
+                    print(f"⚫ [{self.scanned_count}/{self.total_ips}] {ip} - HTTP {response.status_code} (skipped)")
+                return None
+            
             decoded_content = self.safe_decode_content(response.content)
             
             raw_result = {
@@ -240,7 +249,10 @@ class FingerPrinter:
         
         with self.results_lock:
             self.scanned_count += 1
-            if raw_result.get('status_code') is None:
+            if raw_result is None:
+                # This is for 400/404 responses that we skipped
+                pass
+            elif raw_result.get('status_code') is None:
                 self.failed_count += 1
                 print(f"✗ [{self.scanned_count}/{self.total_ips}] {ip} - {raw_result.get('error', 'Error')}")
             else:
@@ -289,7 +301,16 @@ class FingerPrinter:
         return self.dvr_results
 
     def _print_summary(self, threads_used):
-        print(f"\nScan Complete. Found {self.dvr_count} DVRs out of {self.scanned_count} scanned IPs.")
+        print(f"\n{'='*60}")
+        print(f"SCAN SUMMARY")
+        print(f"{'='*60}")
+        print(f"Total IPs: {self.total_ips}")
+        print(f"Scanned: {self.scanned_count}")
+        print(f"HTTP 400/404 skipped: {self.http_error_count}")
+        print(f"Connection failed: {self.failed_count}")
+        print(f"DVRs found: {self.dvr_count}")
+        print(f"{'='*60}")
+        
         if self.dvr_results:
             self.save_data(self.dvr_results)
 
