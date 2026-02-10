@@ -51,6 +51,7 @@ class FingerPrinter:
             "XMEye": [r"xmeye", r"cloud\.net"],
             "TVT": [r"tvt", r"nvms"],
             "Amcrest": [r"amcrest"],
+            'DrayTek Vigor': [r'draytek', r'vigor', r'vilet'],
             "Foscam": [r"foscam"],
             "Reolink": [r"reolink"],
             "Synology": [r"synology", r"diskstation", r"surveillance station"],
