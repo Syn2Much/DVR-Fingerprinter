@@ -38,15 +38,12 @@ Starting DVR Scanner on ips.txt with 10 threads...
 ```
 
 ## Features
-- 🚀 **Concurrent scanning** using `ThreadPoolExecutor` with configurable thread count.
-- 🛡️ **Graceful shutdown** on SIGINT/SIGTERM (Ctrl+C): saves progress, stops workers cleanly.
-- 🎯 **Brand-specific detection** via strict signatures (Hikvision, Dahua, Uniview, Axis, Hanwha/Wisenet, Avigilon, Mobotix, XMEye, TVT, Amcrest, Foscam, Reolink, DrayTek, MikroTik, Ubiquiti, Synology, etc.).
-- 🏷️ **Evidence-rich results**: detection method, signatures matched, headers, titles, server info.
-- 🧠 **Robust content decoding**: tries multiple encodings with safe fallback.
-- 📝 **Auto-saving** JSON + IP list every N detections; empty files created if none found.
-- 🚫 **Noise reduction**: skips processing 400/404 responses; tracks HTTP error count.
-- 📊 **Scan summary**: totals for scanned, skipped errors, failures, DVRs found.
-- ⚙️ **Configurable** input file, threads, verbosity flag, save interval, output paths.
+- **Brand-specific detection** via strict signatures (Hikvision, Dahua, Uniview, Axis, Hanwha/Wisenet, Avigilon, Mobotix, XMEye, TVT, Amcrest, Foscam, Reolink, DrayTek, MikroTik, Ubiquiti, Synology, etc.).
+- **Evidence-rich results**: detection method, signatures matched, headers, titles, server info.
+- **Concurrent scanning** using ThreadPoolExecutor with configurable thread count.
+- **Auto-saving** JSON + IP list every N detections; empty files created if none found.
+- **Scan summary**: totals for scanned, skipped errors, failures, DVRs found.
+- **Configurable** input file, threads, verbosity flag, save interval, output paths.
 
 ## Getting Started
 
